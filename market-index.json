@@ -1,0 +1,29 @@
+{
+  "format": 1,
+  "title": { "en": "MinarKotonoha dsh plugins", "zh": "MinarKotonoha dsh 插件" },
+  "description": {
+    "en": "Efficiency plugins for DeepSeek Harness",
+    "zh": "给 DeepSeek Harness 用的效率插件"
+  },
+  "plugins": [
+    {
+      "name": "dsh-plugin-efficiency",
+      "title": { "en": "Efficiency guards", "zh": "效率护栏" },
+      "description": {
+        "en": "Per-step reasoning-effort ladder, unbounded recursive scan refusal, and turn step notices.",
+        "zh": "按步降档、拒绝无界递归扫描、长回合步数提示。"
+      },
+      "author": "MinarKotonoha",
+      "repository": { "url": "https://github.com/MinarKotonoha/dsh-plugin-efficiency" },
+      "dist-tags": { "latest": "0.1.0" },
+      "versions": [
+        {
+          "version": "0.1.0",
+          "publishTimestamp": 1794800000,
+          "source": { "type": "npm" },
+          "engines": { "dsh": ">=0.2.2-rc.1 <0.3.0-0" }
+        }
+      ]
+    }
+  ]
+}

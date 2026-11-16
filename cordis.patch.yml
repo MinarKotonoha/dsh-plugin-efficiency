@@ -1,0 +1,17 @@
+# Row this bundle adds to a profile. Everything is optional; the values below
+# are the defaults, kept visible so a user can tune them in place.
+- insert:
+    - id: efficiency
+      name: 'dsh-plugin-efficiency'
+      config:
+        ladder:
+          - fromStep: 1
+            effort: medium
+          - fromStep: 2
+            effort: low
+        thresholds:
+          - 12
+          - 24
+        scanTools:
+          - bash
+          - pwsh
