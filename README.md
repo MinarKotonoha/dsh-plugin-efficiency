@@ -1,6 +1,6 @@
 # dsh-efficiency
 
-给 [DeepSeek Harness](https://github.com/deepseek-harness/deepseek-harness) 装一套"少说废话、少跑冤枉路"的默认行为。不需要改 dsh 源码，全部通过它公开的钩子实现。
+给 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 装一套"少说废话、少跑冤枉路"的默认行为。不需要改 dsh 源码，全部通过它公开的钩子实现。
 
 装上之后，同一个模型做同一件事，输出 token 大约少两成，墙钟时间也少两成左右。下面把每个开关的原理、我实测的数字、以及测不准的地方都写清楚。
 
@@ -27,7 +27,7 @@
 表中三条 dsh 行的构建不同，读的时候要分开看：
 
 - **“dsh 原样 / dsh + 本插件”**：0.2.2-rc.1 的源码构建，加上和没加这个插件，是唯一一组严格同龄的对照（同日、同路由、同一构建）。
-- **最后一行**：我自己 fork 上的 `7ec4c89ccb`，那版在源码里又加了几样插件做不到的东西——延迟工具声明（`tool-search`）、技能描述封顶、工具结果裁剪、回放只带本回合、适配器对合并调用的容错。它不在官方发布线里。
+- **最后一行**：我自己 fork（<https://github.com/chengzhuo5/deepseek-harness>）上的提交 `7ec4c89ccb`，那版在源码里又加了几样插件做不到的东西——延迟工具声明（`tool-search`）、技能描述封顶、工具结果裁剪、回放只带本回合、适配器对合并调用的容错。它不在官方发布线里。
 - **pi 和 CC 两行**：来自另一个时间窗口（各 5 次中位），和 dsh 那几次不是同一时段，跨行比值只能看量级。
 
 ### 机制对照
@@ -182,7 +182,7 @@ use agent.model.select() before step preparation
 ## 适用对象：官方 dsh 还是自带源码改动的 fork
 
 - **官方 dsh（没动过源码）**：这个插件能给你三件事——按步降档、步数提示、递归扫描拦截。这三样都只用公开钩子，装上去就生效。
-- **已经用了带源码改动的 fork（比如自带 `step-effort`、`turn-budget`、`tool-search` 的构建）**：降档和步数提示已经被源码覆盖，插件的增量只剩“扫描拦截”（那版源码里没有）。这种情况请把 base 里同 ID 的行关掉，避免两个组件同时写思考档：
+- **已经用了带源码改动的 fork（比如 <https://github.com/chengzhuo5/deepseek-harness>，自带 `step-effort`、`turn-budget`、`tool-search` 的构建）**：降档和步数提示已经被源码覆盖，插件的增量只剩“扫描拦截”（那版源码里没有）。这种情况请把 base 里同 ID 的行关掉，避免两个组件同时写思考档：
 
 ```yaml
 - id: step-effort
